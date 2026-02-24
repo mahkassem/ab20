@@ -1,0 +1,645 @@
+{
+  "info": {
+    "_postman_id": "8edb1191-2f23-4c43-bcc7-77a5f7a41d25",
+    "name": "AB20 API",
+    "description": "Combined Postman collection for the Order API (3000) and Merchant API (3001).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "orderBaseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "merchantBaseUrl",
+      "value": "http://localhost:3001"
+    }
+  ],
+  "item": [
+    {
+      "name": "Order API",
+      "item": [
+        {
+          "name": "Health",
+          "item": [
+            {
+              "name": "Get Health",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{orderBaseUrl}}/health",
+                  "host": [
+                    "{{orderBaseUrl}}"
+                  ],
+                  "path": [
+                    "health"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Products",
+          "item": [
+            {
+              "name": "Create Product",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Keyboard\",\n  \"description\": \"Mechanical keyboard\",\n  \"price\": 99.99,\n  \"inventoryCount\": 20\n}"
+                },
+                "url": {
+                  "raw": "{{orderBaseUrl}}/products",
+                  "host": [
+                    "{{orderBaseUrl}}"
+                  ],
+                  "path": [
+                    "products"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "List Products",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{orderBaseUrl}}/products",
+                  "host": [
+                    "{{orderBaseUrl}}"
+                  ],
+                  "path": [
+                    "products"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Product By Id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{orderBaseUrl}}/products/1",
+                  "host": [
+                    "{{orderBaseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "1"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Product",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Keyboard Pro\",\n  \"price\": 119.99,\n  \"inventoryCount\": 25\n}"
+                },
+                "url": {
+                  "raw": "{{orderBaseUrl}}/products/1",
+                  "host": [
+                    "{{orderBaseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "1"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Product",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{orderBaseUrl}}/products/1",
+                  "host": [
+                    "{{orderBaseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "1"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Users",
+          "item": [
+            {
+              "name": "Create User",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Alice\",\n  \"email\": \"alice@example.com\"\n}"
+                },
+                "url": {
+                  "raw": "{{orderBaseUrl}}/users",
+                  "host": [
+                    "{{orderBaseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "List Users",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{orderBaseUrl}}/users",
+                  "host": [
+                    "{{orderBaseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get User By Id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{orderBaseUrl}}/users/1",
+                  "host": [
+                    "{{orderBaseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "1"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update User",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Alice Updated\",\n  \"email\": \"alice.updated@example.com\"\n}"
+                },
+                "url": {
+                  "raw": "{{orderBaseUrl}}/users/1",
+                  "host": [
+                    "{{orderBaseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "1"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete User",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{orderBaseUrl}}/users/1",
+                  "host": [
+                    "{{orderBaseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "1"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Orders",
+          "item": [
+            {
+              "name": "Create Order (Existing User)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"id\": 1\n  },\n  \"notes\": \"Deliver ASAP\",\n  \"lines\": [\n    { \"productId\": 1, \"quantity\": 2 }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{orderBaseUrl}}/orders",
+                  "host": [
+                    "{{orderBaseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Order (User Data)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"name\": \"Bob\",\n    \"email\": \"bob@example.com\"\n  },\n  \"lines\": [\n    { \"productId\": 1, \"quantity\": 1 }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{orderBaseUrl}}/orders",
+                  "host": [
+                    "{{orderBaseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Order (Insufficient Inventory)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"id\": 1\n  },\n  \"lines\": [\n    { \"productId\": 1, \"quantity\": 9999 }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{orderBaseUrl}}/orders",
+                  "host": [
+                    "{{orderBaseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Stress Test - Parallel Create Orders",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{orderBaseUrl}}/health",
+                  "host": [
+                    "{{orderBaseUrl}}"
+                  ],
+                  "path": [
+                    "health"
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const baseUrl = pm.collectionVariables.get('orderBaseUrl') || pm.variables.get('orderBaseUrl') || 'http://localhost:3000';",
+                      "const productId = Number(pm.collectionVariables.get('stressProductId') || 1);",
+                      "const userId = Number(pm.collectionVariables.get('stressUserId') || 1);",
+                      "const quantityPerOrder = Number(pm.collectionVariables.get('stressQuantityPerOrder') || 1);",
+                      "const parallelRequests = Number(pm.collectionVariables.get('stressParallelRequests') || 20);",
+                      "",
+                      "pm.test('Stress test configuration is valid', function () {",
+                      "  pm.expect(productId).to.be.a('number').and.to.be.above(0);",
+                      "  pm.expect(userId).to.be.a('number').and.to.be.above(0);",
+                      "  pm.expect(quantityPerOrder).to.be.a('number').and.to.be.above(0);",
+                      "  pm.expect(parallelRequests).to.be.a('number').and.to.be.above(0);",
+                      "});",
+                      "",
+                      "function sendOrderRequest(index) {",
+                      "  return new Promise(function (resolve) {",
+                      "    pm.sendRequest({",
+                      "      url: baseUrl + '/orders',",
+                      "      method: 'POST',",
+                      "      header: { 'Content-Type': 'application/json' },",
+                      "      body: {",
+                      "        mode: 'raw',",
+                      "        raw: JSON.stringify({",
+                      "          user: { id: userId },",
+                      "          notes: 'parallel-test-' + index,",
+                      "          lines: [{ productId: productId, quantity: quantityPerOrder }]",
+                      "        })",
+                      "      }",
+                      "    }, function (err, res) {",
+                      "      resolve({ err: err, status: res ? res.code : 0 });",
+                      "    });",
+                      "  });",
+                      "}",
+                      "",
+                      "const orderCalls = [];",
+                      "for (let i = 0; i < parallelRequests; i += 1) {",
+                      "  orderCalls.push(sendOrderRequest(i + 1));",
+                      "}",
+                      "",
+                      "Promise.all(orderCalls).then(function (results) {",
+                      "  const successCount = results.filter(function (result) { return result.status === 201; }).length;",
+                      "  const conflictCount = results.filter(function (result) { return result.status === 409; }).length;",
+                      "  const errorCount = results.filter(function (result) { return Boolean(result.err); }).length;",
+                      "",
+                      "  pm.collectionVariables.set('stressSuccessCount', String(successCount));",
+                      "  pm.collectionVariables.set('stressConflictCount', String(conflictCount));",
+                      "  pm.collectionVariables.set('stressErrorCount', String(errorCount));",
+                      "",
+                      "  pm.test('Parallel calls completed without transport errors', function () {",
+                      "    pm.expect(errorCount).to.eql(0);",
+                      "  });",
+                      "",
+                      "  pm.sendRequest(baseUrl + '/products/' + productId, function (productErr, productRes) {",
+                      "    pm.test('Can fetch product after stress run', function () {",
+                      "      pm.expect(productErr).to.eql(null);",
+                      "      pm.expect(productRes).to.have.property('code', 200);",
+                      "    });",
+                      "",
+                      "    pm.test('Final inventory is not negative', function () {",
+                      "      const productJson = productRes.json();",
+                      "      pm.expect(productJson).to.have.property('inventoryCount');",
+                      "      pm.expect(productJson.inventoryCount).to.be.at.least(0);",
+                      "    });",
+                      "",
+                      "    pm.test('At least one order call was processed', function () {",
+                      "      pm.expect(successCount + conflictCount).to.equal(parallelRequests);",
+                      "    });",
+                      "  });",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "List Orders",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{orderBaseUrl}}/orders",
+                  "host": [
+                    "{{orderBaseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete All Orders",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{orderBaseUrl}}/orders",
+                  "host": [
+                    "{{orderBaseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Order By Id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{orderBaseUrl}}/orders/1",
+                  "host": [
+                    "{{orderBaseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "1"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Merchant API",
+      "item": [
+        {
+          "name": "Health",
+          "item": [
+            {
+              "name": "Get Health",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{merchantBaseUrl}}/health",
+                  "host": [
+                    "{{merchantBaseUrl}}"
+                  ],
+                  "path": [
+                    "health"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Users",
+          "item": [
+            {
+              "name": "Create User",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Alice\",\n  \"email\": \"alice@example.com\"\n}"
+                },
+                "url": {
+                  "raw": "{{merchantBaseUrl}}/users",
+                  "host": [
+                    "{{merchantBaseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "List Users",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{merchantBaseUrl}}/users",
+                  "host": [
+                    "{{merchantBaseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Categories",
+          "item": [
+            {
+              "name": "Create Category",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Grocery\",\n  \"description\": \"Everyday items\"\n}"
+                },
+                "url": {
+                  "raw": "{{merchantBaseUrl}}/categories",
+                  "host": [
+                    "{{merchantBaseUrl}}"
+                  ],
+                  "path": [
+                    "categories"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "List Categories",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{merchantBaseUrl}}/categories",
+                  "host": [
+                    "{{merchantBaseUrl}}"
+                  ],
+                  "path": [
+                    "categories"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Stores",
+          "item": [
+            {
+              "name": "Create Store",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Downtown Market\",\n  \"description\": \"Main location\",\n  \"ownerUserId\": 1,\n  \"categoryId\": 1\n}"
+                },
+                "url": {
+                  "raw": "{{merchantBaseUrl}}/stores",
+                  "host": [
+                    "{{merchantBaseUrl}}"
+                  ],
+                  "path": [
+                    "stores"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "List Stores",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{merchantBaseUrl}}/stores",
+                  "host": [
+                    "{{merchantBaseUrl}}"
+                  ],
+                  "path": [
+                    "stores"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
