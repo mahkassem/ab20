@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS products (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
   description TEXT,
+  store_id INTEGER NOT NULL,
   price REAL NOT NULL CHECK (price >= 0),
   inventory_count INTEGER NOT NULL CHECK (inventory_count >= 0),
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,

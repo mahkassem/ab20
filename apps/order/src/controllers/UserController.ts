@@ -3,6 +3,7 @@ import type { Request, Response } from "express";
 import { UserService } from "../services/UserService";
 import { AppError } from "../app/AppError";
 import type { CreateUserInput, UpdateUserInput } from "../types/User";
+import { signToken } from "../helpers/JWS";
 
 export class UserController {
   constructor(private readonly userService: UserService = new UserService()) {}
@@ -19,7 +20,8 @@ export class UserController {
     }
 
     const user = this.userService.create({ name, email });
-    res.status(201).json(user);
+    const token = signToken(name);
+    res.status(201).json(token);
   };
 
   list = (_req: Request, res: Response): void => {
@@ -47,7 +49,10 @@ export class UserController {
       throw new AppError(400, "name must be a string");
     }
 
-    if (body.email !== undefined && (typeof body.email !== "string" || !body.email.includes("@"))) {
+    if (
+      body.email !== undefined &&
+      (typeof body.email !== "string" || !body.email.includes("@"))
+    ) {
       throw new AppError(400, "email must be valid");
     }
 
