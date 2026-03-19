@@ -7,18 +7,22 @@ import type { CreateUserInput, UpdateUserInput } from "../types/User";
 export class UserController {
   constructor(private readonly userService: UserService = new UserService()) {}
 
-  create = (req: Request, res: Response): void => {
-    const { name, email } = req.body as Partial<CreateUserInput>;
+  async create(req: Request, res: Response): Promise<void> {
+    const { name, email, password } = req.body as Partial<CreateUserInput>;
 
     if (!name || typeof name !== "string") {
       throw new AppError(400, "name is required");
+    }
+
+    if (!password || typeof password !== "string") {
+      throw new AppError(400, "password is required");
     }
 
     if (!email || typeof email !== "string" || !email.includes("@")) {
       throw new AppError(400, "valid email is required");
     }
 
-    const user = this.userService.create({ name, email });
+    const user = await this.userService.create({ name, email, password });
     res.status(201).json(user);
   };
 

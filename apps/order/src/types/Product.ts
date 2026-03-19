@@ -4,6 +4,7 @@ export interface Product {
   description: string | null;
   price: number;
   inventoryCount: number;
+  storeId: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -20,4 +21,5 @@ export interface UpdateProductInput {
   description?: string;
   price?: number;
   inventoryCount?: number;
+  storeId?: number;
 }

@@ -1,5 +1,4 @@
 import type BetterSqlite3 from "better-sqlite3";
-
 import { db } from "../db/sqlite";
 import type { ProductRow } from "../types/DatabaseRows";
 import type { CreateProductInput, Product, UpdateProductInput } from "../types/Product";
@@ -10,6 +9,7 @@ function toProduct(row: ProductRow): Product {
     name: row.name,
     description: row.description,
     price: row.price,
+    storeId: row.store_id,
     inventoryCount: row.inventory_count,
     createdAt: row.created_at,
     updatedAt: row.updated_at
@@ -23,7 +23,7 @@ export class ProductRepository {
     const result = this.connection
       .prepare(
         `
-        INSERT INTO products (name, description, price, inventory_count)
+        INSERT INTO products (name, description, price, store_id, inventory_count)
         VALUES (?, ?, ?, ?)
       `
       )
@@ -36,7 +36,7 @@ export class ProductRepository {
     const rows = this.connection
       .prepare(
         `
-        SELECT id, name, description, price, inventory_count, created_at, updated_at
+        SELECT id, name, description, price, inventory_count, store_id, created_at, updated_at
         FROM products
         ORDER BY id DESC
       `
@@ -50,7 +50,7 @@ export class ProductRepository {
     const row = this.connection
       .prepare(
         `
-        SELECT id, name, description, price, inventory_count, created_at, updated_at
+        SELECT id, name, description, price, inventory_count, store_id, created_at, updated_at
         FROM products
         WHERE id = ?
       `
@@ -81,6 +81,11 @@ export class ProductRepository {
     if (input.price !== undefined) {
       updates.push("price = ?");
       values.push(input.price);
+    }
+
+    if (input.storeId !== undefined) {
+      updates.push("store_id = ?");
+      values.push(input.storeId);
     }
 
     if (input.inventoryCount !== undefined) {

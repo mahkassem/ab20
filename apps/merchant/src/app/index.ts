@@ -4,6 +4,8 @@ import { errorHandler } from "./errorHandler";
 import categoryRoutes from "../routes/categoryRoutes";
 import storeRoutes from "../routes/storeRoutes";
 import userRoutes from "../routes/userRoutes";
+import authRoutes from "../routes/authRoutes";
+import AuthenticationMiddleware from "../middlewares/AuthenticationMiddleware";
 
 export function createApp() {
   const app = express();
@@ -14,6 +16,9 @@ export function createApp() {
     res.json({ status: "ok" });
   });
 
+  app.use("/auth", authRoutes);
+  // jwt middleware
+  app.use(AuthenticationMiddleware);
   app.use("/users", userRoutes);
   app.use("/categories", categoryRoutes);
   app.use("/stores", storeRoutes);

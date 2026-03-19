@@ -4,6 +4,7 @@ export interface ProductRow {
   description: string | null;
   price: number;
   inventory_count: number;
+  store_id: number;
   created_at: string;
   updated_at: string;
 }

@@ -9,6 +9,7 @@ function toUser(row: UserRow): User {
     id: row.id,
     name: row.name,
     email: row.email,
+    password: row.password,
     createdAt: row.created_at,
     updatedAt: row.updated_at
   };
@@ -21,7 +22,7 @@ export class UserRepository {
     const result = this.connection
       .prepare(
         `
-        INSERT INTO users (name, email)
+        INSERT INTO users (name, email, password)
         VALUES (?, ?)
       `
       )
@@ -48,12 +49,30 @@ export class UserRepository {
     const row = this.connection
       .prepare(
         `
-        SELECT id, name, email, created_at, updated_at
+        SELECT id, name, email, password, created_at, updated_at
         FROM users
         WHERE id = ?
       `
       )
       .get(id) as UserRow | undefined;
+
+    if (!row) {
+      return null;
+    }
+
+    return toUser(row);
+  }
+
+  findByEmail(email: string): User | null {
+    const row = this.connection
+      .prepare(
+        `
+        SELECT id, name, email, password, created_at, updated_at
+        FROM users
+        WHERE email = ?
+      `
+      )
+      .get(email) as UserRow | undefined;
 
     if (!row) {
       return null;

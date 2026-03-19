@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS products (
   description TEXT,
   price REAL NOT NULL CHECK (price >= 0),
   inventory_count INTEGER NOT NULL CHECK (inventory_count >= 0),
+  store_id INTEGER NOY NULL,
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
