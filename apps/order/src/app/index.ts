@@ -4,6 +4,10 @@ import { errorHandler } from "./errorHandler";
 import orderRoutes from "../routes/orderRoutes";
 import productRoutes from "../routes/productRoutes";
 import userRoutes from "../routes/userRoutes";
+import authMiddleware from "../middleware/authenticate";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export function createApp() {
   const app = express();

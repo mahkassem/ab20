@@ -6,6 +6,7 @@ export interface Product {
   inventoryCount: number;
   createdAt: string;
   updatedAt: string;
+  store_id: number;
 }
 
 export interface CreateProductInput {
@@ -13,6 +14,7 @@ export interface CreateProductInput {
   description?: string;
   price: number;
   inventoryCount: number;
+  store_id: number;
 }
 
 export interface UpdateProductInput {
@@ -20,4 +22,5 @@ export interface UpdateProductInput {
   description?: string;
   price?: number;
   inventoryCount?: number;
+  store_id: number;
 }

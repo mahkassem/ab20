@@ -4,6 +4,7 @@ import { errorHandler } from "./errorHandler";
 import categoryRoutes from "../routes/categoryRoutes";
 import storeRoutes from "../routes/storeRoutes";
 import userRoutes from "../routes/userRoutes";
+import authMiddleware from "../middleware/authenticate";
 
 export function createApp() {
   const app = express();

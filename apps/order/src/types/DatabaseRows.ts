@@ -6,6 +6,7 @@ export interface ProductRow {
   inventory_count: number;
   created_at: string;
   updated_at: string;
+  store_id: number;
 }
 
 export interface UserRow {

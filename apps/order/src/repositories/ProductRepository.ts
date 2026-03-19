@@ -2,7 +2,11 @@ import type BetterSqlite3 from "better-sqlite3";
 
 import { db } from "../db/sqlite";
 import type { ProductRow } from "../types/DatabaseRows";
-import type { CreateProductInput, Product, UpdateProductInput } from "../types/Product";
+import type {
+  CreateProductInput,
+  Product,
+  UpdateProductInput,
+} from "../types/Product";
 
 function toProduct(row: ProductRow): Product {
   return {
@@ -12,7 +16,8 @@ function toProduct(row: ProductRow): Product {
     price: row.price,
     inventoryCount: row.inventory_count,
     createdAt: row.created_at,
-    updatedAt: row.updated_at
+    updatedAt: row.updated_at,
+    store_id: row.store_id,
   };
 }
 
@@ -23,11 +28,17 @@ export class ProductRepository {
     const result = this.connection
       .prepare(
         `
-        INSERT INTO products (name, description, price, inventory_count)
-        VALUES (?, ?, ?, ?)
-      `
+        INSERT INTO products (name, description, price, inventory_count, store_id)
+        VALUES (?, ?, ?, ?, ?)
+      `,
       )
-      .run(input.name, input.description ?? null, input.price, input.inventoryCount);
+      .run(
+        input.name,
+        input.description ?? null,
+        input.price,
+        input.inventoryCount,
+        input.store_id,
+      );
 
     return this.findById(Number(result.lastInsertRowid)) as Product;
   }
@@ -39,7 +50,7 @@ export class ProductRepository {
         SELECT id, name, description, price, inventory_count, created_at, updated_at
         FROM products
         ORDER BY id DESC
-      `
+      `,
       )
       .all() as ProductRow[];
 
@@ -53,7 +64,7 @@ export class ProductRepository {
         SELECT id, name, description, price, inventory_count, created_at, updated_at
         FROM products
         WHERE id = ?
-      `
+      `,
       )
       .get(id) as ProductRow | undefined;
 
@@ -88,6 +99,11 @@ export class ProductRepository {
       values.push(input.inventoryCount);
     }
 
+    if (input.store_id !== undefined) {
+      updates.push("store_id = ?");
+      values.push(input.store_id);
+    }
+
     if (updates.length === 0) {
       return this.findById(id);
     }
@@ -101,7 +117,7 @@ export class ProductRepository {
         UPDATE products
         SET ${updates.join(", ")}
         WHERE id = ?
-      `
+      `,
       )
       .run(...values);
 
@@ -109,7 +125,9 @@ export class ProductRepository {
   }
 
   delete(id: number): boolean {
-    const result = this.connection.prepare("DELETE FROM products WHERE id = ?").run(id);
+    const result = this.connection
+      .prepare("DELETE FROM products WHERE id = ?")
+      .run(id);
     return result.changes > 0;
   }
 
@@ -120,7 +138,7 @@ export class ProductRepository {
         UPDATE products
         SET inventory_count = inventory_count - ?, updated_at = CURRENT_TIMESTAMP
         WHERE id = ?
-      `
+      `,
       )
       .run(quantity, productId);
 
