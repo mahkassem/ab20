@@ -1,6 +1,6 @@
 # Technical Assessment Requirements
 
-This repository contains two Node.js APIs:
+This repository contains two Laravel (PHP) APIs:
 
 - **Order API**: `apps/order` (default port `3000`)
 - **Merchant API**: `apps/merchant` (default port `3001`)

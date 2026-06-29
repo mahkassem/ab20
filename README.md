@@ -1,9 +1,16 @@
-# AB20 APIs (Express + TypeScript + SQLite)
+# AB20 APIs (Laravel + PHP + SQLite)
 
-This repo contains two small, layered APIs:
+Laravel port of the AB20 technical assessment. Two small, layered APIs:
 
-- **Order API**: `apps/order` (default `http://localhost:3000`)
-- **Merchant API**: `apps/merchant` (default `http://localhost:3001`)
+- **Order API**: `apps/order` (run on `http://localhost:3000`)
+- **Merchant API**: `apps/merchant` (run on `http://localhost:3001`)
+
+Each app is layered the same way: **routes → controllers → services → repositories**, with a
+central `AppException` rendered as JSON. SQLite is the default database.
+
+> This is the **starting point** for the assessment. See [`REQUIREMENTS.md`](REQUIREMENTS.md)
+> for what to implement (JWT auth across both apps + the product↔store relationship). Those
+> features are intentionally **not** implemented yet.
 
 ## Postman
 
@@ -14,32 +21,42 @@ Combined collection: `postman/ab20.postman_collection.json`
 
 ## Run
 
-### Order (Run)
+Same steps for each app — only the directory and port differ.
+
+### Order (port 3000)
 
 ```bash
 cd apps/order
-npm install
-npm run dev
+composer install
+cp .env.example .env
+php artisan key:generate
+touch database/database.sqlite
+php artisan migrate
+php artisan serve --port=3000
 ```
 
-### Merchant (Run)
+### Merchant (port 3001)
 
 ```bash
 cd apps/merchant
-npm install
-npm run dev
+composer install
+cp .env.example .env
+php artisan key:generate
+touch database/database.sqlite
+php artisan migrate
+php artisan serve --port=3001
 ```
 
 ## Endpoints
 
-### Order (Endpoints)
+### Order
 
 - `GET /health`
 - Products: `POST/GET/GET:id/PUT:id/DELETE:id /products`
 - Users: `POST/GET/GET:id/PUT:id/DELETE:id /users`
-- Orders: `POST/GET/GET:id/DELETE /orders`
+- Orders: `POST/GET/GET:id /orders`, `DELETE /orders` (delete all)
 
-### Merchant (Endpoints)
+### Merchant
 
 - `GET /health`
 - Users: `POST/GET/GET:id/PUT:id/DELETE:id /users`
