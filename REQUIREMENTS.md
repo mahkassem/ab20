@@ -7,7 +7,7 @@ This repository contains two Laravel (PHP) APIs:
 
 Your task is to implement the requirements below.
 
-## 1) Authentication (JWT) — Required
+## 1) Authentication (JWT/Sanctum) — Required
 
 Add authentication using **JWT** and make it work **across both apps**.
 
